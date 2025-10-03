@@ -1,175 +1,197 @@
 <style>
   :host {
-    --bright-blue: oklch(51.01% 0.274 263.83);
-    --electric-violet: oklch(53.18% 0.28 296.97);
-    --french-violet: oklch(47.66% 0.246 305.88);
-    --vivid-pink: oklch(69.02% 0.277 332.77);
-    --hot-red: oklch(61.42% 0.238 15.34);
-    --orange-red: oklch(63.32% 0.24 31.68);
-
-    --gray-900: oklch(19.37% 0.006 300.98);
-    --gray-700: oklch(36.98% 0.014 302.71);
-    --gray-400: oklch(70.9% 0.015 304.04);
-
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
+    --blue: #3b82f6;
+    --pink: #ff4fcf;
+    --violet: #8a2be2;
+    --orange: #ff6b6b;
+    --gray-900: #111827;
+    --gray-700: #4b5563;
+    --bg-card: #ffffff;
+    --bg-hover: rgba(59,130,246,0.05);
+    --pill-radius: 2rem;
+    font-family: "Inter", sans-serif;
     box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1 {
-    font-size: 3.125rem;
-    color: var(--gray-900);
-    font-weight: 500;
-    margin: 0;
-  }
-
-  p {
-    margin: 0;
-    color: var(--gray-700);
   }
 
   main {
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     padding: 2rem 1rem;
-    box-sizing: inherit;
-    position: relative;
+    background: #f0f0f0;
   }
 
-  .content {
+  .placeholder {
+    width: 100%;
+    max-width: 700px;
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 900px;
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+    margin: 0;
+    color: var(--gray-900);
+  }
+
+  .header p {
+    margin: 0;
+    color: var(--gray-700);
+    font-size: 1rem;
   }
 
   .divider {
     width: 100%;
-    height: 2px;
-    background: var(--vivid-pink);
-    margin: 1rem 0;
+    height: 3px;
     border-radius: 2px;
+    background: linear-gradient(to right, var(--orange), var(--pink), var(--violet));
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  .event-card {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 1rem;
+  }
+
+  .event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  }
+
+  .event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--gray-900);
+  }
+
+  .event-description {
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 3px solid var(--blue);
+    font-size: 0.925rem;
+    line-height: 1.5;
+    color: var(--gray-700);
   }
 
   .pill-group {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
   }
 
   .pill {
-    display: flex;
-    align-items: center;
-    --pill-accent: var(--bright-blue);
-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
-    color: var(--pill-accent);
-    padding-inline: 0.75rem;
-    padding-block: 0.375rem;
-    border-radius: 2.75rem;
-    font-size: 0.875rem;
-    font-weight: 500;
+    padding: 0.5rem 1rem;
+    background: var(--bg-hover);
+    color: var(--blue);
+    border-radius: var(--pill-radius);
     text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: background 0.3s ease, transform 0.2s ease;
     cursor: pointer;
-    user-select: none;
   }
 
   .pill:hover {
-    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
+    background: rgba(59,130,246,0.15);
+    transform: translateY(-1px);
   }
 
-  /* Styl dla rozwijanego tekstu zadaniowego */
-  .task-text {
-    white-space: pre-line; 
-    background: #f9f9f9;
-    border-left: 4px solid var(--hot-red);
-    padding: 1rem;
-    border-radius: 8px;
-    color: var(--gray-700);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    width: 100%;
-  }
-
-  /* Formatowanie tekstu w środku */
-  .task-text b {
-    color: var(--hot-red);
-  }
-  .task-text i {
-    color: var(--bright-blue);
-  }
-  .task-text span.emoji {
-    margin-right: 0.25rem;
+  @media (max-width: 480px) {
+    .placeholder {
+      padding: 1rem;
+    }
+    .header h1 {
+      font-size: 1.5rem;
+    }
+    .header p {
+      font-size: 0.875rem;
+    }
+    .event-card {
+      padding: 0.75rem;
+    }
+    .event-description {
+      padding-left: 0.25rem;
+    }
   }
 </style>
 
-<main class="main">
-  <div class="content">
+<main>
+  <div class="placeholder">
+    <!-- HEADER -->
     <div class="header">
       <h1>Notatki</h1>
-      <p>notatki, aplikacje, pdf i inne</p>
+      <p>notatki, aplikacje, pdf i inne materiały</p>
     </div>
 
     <div class="divider"></div>
 
-    <div class="pill-group">
-      @for (item of [
-        { 
-          title: '2025-10-01: Zadania Wspólnoty', 
-          type: 'text',
-          show: false,
-          content: `Lider
-W parafii
-<b>📌 Kontakt z księdzem proboszczem/opiekunem</b>
-- ustalenie współpracy i zgody na działania
-<b>🎵 Kontakt z organistą</b>
-- kiedy posługujemy na wspólnych Mszach Św
-<b>📰 Przygotowywanie ogłoszeń parafialnych</b>
-- przekazywanie księdzu (najpóźniej pt przed nd)
-<b>✝️ Zamawianie Mszy Św.</b>
+    <!-- EVENTY -->
+    <div *ngFor="let item of items; trackBy: trackByTitle" class="event-card">
+      <div class="event-header" (click)="toggle(item)">
+        <span>📌 {{ item.title }}</span>
+        <span>{{ item.show ? '▲' : '▼' }}</span>
+      </div>
 
-Wspólnota:
-<b>💡 Odpowiedzialność za życie wspólnoty</b>
-- przygotowanie planu formacyjno-ewangelizacyjnego
-- organizacja spotkań Rady Wspólnoty
+      <!-- PILLS / LINKI -->
+      <div class="pill-group" *ngIf="item.show">
+        <ng-container *ngFor="let link of item.links; trackBy: trackByName">
 
-Na zewnątrz:
-<b>📱 Udział w grupie Liderów na Whatsappie</b>
-- reagowanie na ustalenia
-<b>🧑‍🤝‍🧑 Kontakt z koordynatorem Odnowy</b>
-
-Sfera osobista:
-<b>🙏 Modlitwa, formacja, rozwój duchowy</b>`
-        },
-        { title: 'aplikacja: ŻYCZENIA', type: 'link', href: 'https://bestwhishes.netlify.app/' }
-      ]; track item.title) {
-
-        <!-- linki -->
-        <ng-container *ngIf="item.type === 'link'; else textBlock">
-          <a class="pill" [href]="item.href" target="_blank" rel="noopener">
-            <span>{{ item.title }}</span>
+          <!-- linki z URL -->
+          <a class="pill" *ngIf="link?.url" [href]="link.url" target="_blank" rel="noopener">
+            {{ link.name }}
           </a>
-        </ng-container>
 
-        <!-- rozwijalny tekst -->
-        <ng-template #textBlock>
-          <div class="pill" (click)="item.show = !item.show">
-            <span>{{ item.title }}</span>
-            <span *ngIf="!item.show"> ▼</span>
-            <span *ngIf="item.show"> ▲</span>
-          </div>
-          <div class="task-text" *ngIf="item.show" [innerHTML]="item.content"></div>
-        </ng-template>
-      }
+          <!-- przyciski tylko dla linków chronionych -->
+          <button class="pill" *ngIf="link.protected" (click)="toggleLink(link)">
+            {{ link.show ? 'Ukryj podsumowanie' : 'Pokaż podsumowanie' }}
+          </button>
+
+          <!-- zwykły tekst od razu -->
+          <p *ngIf="link.text && !link.protected" [innerHTML]="link.text"></p>
+
+          <!-- chroniony tekst, pokaz tylko gdy show=true -->
+          <p *ngIf="link.text && link.protected && link.show" [innerHTML]="link.text"></p>
+
+        </ng-container>
+      </div>
+
+      <!-- proste linki typu 'href' (np. aplikacja ŻYCZENIA) -->
+      <div class="pill-group" *ngIf="item.type === 'link' && item.href">
+        <a class="pill" [href]="item.href" target="_blank" rel="noopener">
+          Otwórz aplikację
+        </a>
+      </div>
+
+    </div>
+
+    <!-- PRZYCISK ZAMKNIJ STRONĘ -->
+    <div style="margin-top: 1rem; text-align: center;">
+      <button class="pill" (click)="closePage()">Zamknij stronę</button>
     </div>
   </div>
 </main>
 
-<router-outlet />
+<router-outlet></router-outlet>
